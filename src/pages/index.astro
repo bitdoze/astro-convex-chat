@@ -1,16 +1,47 @@
 ---
-
+import ChatLayout from '../layouts/ChatLayout.astro';
+import MessageList from '../components/MessageList';
+import MessageInput from '../components/MessageInput';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<ChatLayout title="Astro + Convex Chat">
+  <div class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="max-w-4xl mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold text-gray-900">
+              ⚡ Astro + Convex Chat
+            </h1>
+            <p class="text-sm text-gray-600">
+              Lightning-fast real-time messaging
+            </p>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-500">
+            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span>Live</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Chat Container -->
+    <main class="flex-1 max-w-4xl mx-auto w-full bg-white shadow-lg flex flex-col">
+      <MessageList client:load />
+      <MessageInput client:load />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t">
+      <div class="max-w-4xl mx-auto px-4 py-3">
+        <p class="text-center text-sm text-gray-600">
+          Built with
+          <a href="https://astro.build" class="text-blue-600 hover:underline">Astro</a>
+          and
+          <a href="https://convex.dev" class="text-blue-600 hover:underline">Convex</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+</ChatLayout>
