@@ -2,15 +2,15 @@
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
+
 import cloudflare from "@astrojs/cloudflare";
+
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    react({
-      experimentalReactChildren: true,
-    }),
-  ],
+  integrations: [react()],
+
   env: {
     schema: {
       CONVEX_URL: envField.string({
@@ -19,16 +19,10 @@ export default defineConfig({
       }),
     },
   },
+
   vite: {
     plugins: [tailwindcss()],
-    define: {
-      global: "globalThis",
-    },
-    ssr: {
-      external: ["node:async_hooks"],
-      noExternal: ["react", "react-dom"],
-    },
   },
-  adapter: cloudflare(),
-  output: "server",
+
+  adapter: vercel(),
 });
